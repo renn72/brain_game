@@ -1,6 +1,7 @@
-const tf = require('@tensorflow/tfjs')
+import tf from '@tensorflow/tfjs'
 
 const model = tf.sequential()
+
 model.add(
   tf.layers.conv2d({
     inputShape: [28, 28, 1],
@@ -25,4 +26,4 @@ model.compile({
   metrics: ['accuracy'],
 })
 
-module.exports = model
+export default model

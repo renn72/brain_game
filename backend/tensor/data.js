@@ -1,26 +1,9 @@
-/**
- * @license
- * Copyright 2018 Google LLC. All Rights Reserved.
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * =============================================================================
- */
-
-const tf = require('@tensorflow/tfjs')
-const assert = require('assert')
-const fs = require('fs')
-const https = require('https')
-const util = require('util')
-const zlib = require('zlib')
+import tf from '@tensorflow/tfjs'
+import assert from 'assert'
+import fs from 'fs'
+import https from 'https'
+import util from 'util'
+import zlib from 'zlib'
 
 const readFile = util.promisify(fs.readFile)
 
@@ -28,10 +11,10 @@ const readFile = util.promisify(fs.readFile)
 const BASE_URL = 'https://storage.googleapis.com/cvdf-datasets/mnist/'
 // const TRAIN_IMAGES_FILE = 'train-images-idx3-ubyte'
 // const TRAIN_LABELS_FILE = 'train-labels-idx1-ubyte'
-const TRAIN_IMAGES_FILE = 't10k-images-idx3-ubyte'
-const TRAIN_LABELS_FILE = 't10k-labels-idx1-ubyte'
-const TEST_IMAGES_FILE = 't10k-images-idx3-ubyte'
-const TEST_LABELS_FILE = 't10k-labels-idx1-ubyte'
+const TRAIN_IMAGES_FILE = './t10k-images-idx3-ubyte'
+const TRAIN_LABELS_FILE = './t10k-labels-idx1-ubyte'
+const TEST_IMAGES_FILE = './t10k-images-idx3-ubyte'
+const TEST_LABELS_FILE = './t10k-labels-idx1-ubyte'
 const IMAGE_HEADER_MAGIC_NUM = 2051
 const IMAGE_HEADER_BYTES = 16
 const IMAGE_HEIGHT = 28
@@ -45,20 +28,20 @@ const LABEL_FLAT_SIZE = 10
 // Downloads a test file only once and returns the buffer for the file.
 async function fetchOnceAndSaveToDiskWithBuffer(filename) {
   return new Promise((resolve) => {
-    const url = `${BASE_URL}${filename}.gz`
+    // const url = `${BASE_URL}${filename}.gz`
     if (fs.existsSync(filename)) {
       resolve(readFile(filename))
       return
     }
-    const file = fs.createWriteStream(filename)
-    console.log(`  * Downloading from: ${url}`)
-    https.get(url, (response) => {
-      const unzip = zlib.createGunzip()
-      response.pipe(unzip).pipe(file)
-      unzip.on('end', () => {
-        resolve(readFile(filename))
-      })
-    })
+    // const file = fs.createWriteStream(filename)
+    // console.log(`  * Downloading from: ${url}`)
+    // https.get(url, (response) => {
+    //   const unzip = zlib.createGunzip()
+    //   response.pipe(unzip).pipe(file)
+    //   unzip.on('end', () => {
+    //     resolve(readFile(filename))
+    //   })
+    // })
   })
 }
 
@@ -122,7 +105,7 @@ async function loadLabels(filename) {
 }
 
 /** Helper class to handle loading training and test data. */
-class MnistDataset {
+export default class MnistDataset {
   constructor() {
     this.dataset = null
     this.trainSize = 0
@@ -191,4 +174,4 @@ class MnistDataset {
   }
 }
 
-module.exports = new MnistDataset()
+// module.exports = new MnistDataset()
