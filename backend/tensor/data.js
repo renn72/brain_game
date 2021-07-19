@@ -8,13 +8,13 @@ import zlib from 'zlib'
 const readFile = util.promisify(fs.readFile)
 
 // MNIST data constants:
-const BASE_URL = 'https://storage.googleapis.com/cvdf-datasets/mnist/'
+// const BASE_URL = 'https://storage.googleapis.com/cvdf-datasets/mnist/'
 // const TRAIN_IMAGES_FILE = 'train-images-idx3-ubyte'
 // const TRAIN_LABELS_FILE = 'train-labels-idx1-ubyte'
-const TRAIN_IMAGES_FILE = './t10k-images-idx3-ubyte'
-const TRAIN_LABELS_FILE = './t10k-labels-idx1-ubyte'
-const TEST_IMAGES_FILE = './t10k-images-idx3-ubyte'
-const TEST_LABELS_FILE = './t10k-labels-idx1-ubyte'
+const TRAIN_IMAGES_FILE = './backend/tensor/t10k-images-idx3-ubyte'
+const TRAIN_LABELS_FILE = './backend/tensor/t10k-labels-idx1-ubyte'
+const TEST_IMAGES_FILE = './backend/tensor/t10k-images-idx3-ubyte'
+const TEST_LABELS_FILE = './backend/tensor/t10k-labels-idx1-ubyte'
 const IMAGE_HEADER_MAGIC_NUM = 2051
 const IMAGE_HEADER_BYTES = 16
 const IMAGE_HEIGHT = 28
@@ -116,15 +116,19 @@ export default class MnistDataset {
 
   /** Loads training and test data. */
   async loadData() {
+    console.log('load data')
     if (this.dataset) {
+      console.log('has data')
       return
     }
+    console.log('no data')
     this.dataset = await Promise.all([
       loadImages(TRAIN_IMAGES_FILE),
-      loadLabels(TRAIN_LABELS_FILE),
+      loadLabels(TRAIN_LALS_FILE),
       loadImages(TEST_IMAGES_FILE),
       loadLabels(TEST_LABELS_FILE),
     ])
+    console.log('loaded data')
     this.trainSize = this.dataset[0].length
     this.testSize = this.dataset[2].length
   }
