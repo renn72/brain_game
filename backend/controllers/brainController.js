@@ -5,8 +5,9 @@ import Brain from '../models/brain.js'
 const router = express.Router()
 
 router.post('/', validateBrain, (req, res) => {
-  Brain.create().then(() => {
-    res.status(201).json()
+  Brain.create(req.body).then((accuracy) => {
+    res.status(201).json(accuracy)
+    console.log(accuracy)
   })
 })
 

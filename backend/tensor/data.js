@@ -116,6 +116,9 @@ export default class MnistDataset {
 
   /** Loads training and test data. */
   async loadData() {
+    if (this.dataset) {
+      return
+    }
     this.dataset = await Promise.all([
       loadImages(TRAIN_IMAGES_FILE),
       loadLabels(TRAIN_LABELS_FILE),
