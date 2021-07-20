@@ -6,7 +6,7 @@ import dotenv from 'dotenv'
 import errorHandler from './middlewares/error_handler.js'
 
 import brainController from './controllers/brainController.js'
-// import highScoreController from './controllers/highScoreController.js'
+import highScoreController from './controllers/highScoreController.js'
 
 dotenv.config()
 
@@ -26,6 +26,6 @@ app.use(express.static('client'))
 app.use(express.json())
 
 app.use('/api/brain', brainController)
-// app.use('/api/high-score', highScoreController)
+app.use('/api/high_score', highScoreController)
 
 app.use(errorHandler)

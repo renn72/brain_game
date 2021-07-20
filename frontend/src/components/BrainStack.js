@@ -9,7 +9,7 @@ export default function BrainStack() {
   return (
     <div>
       <section className='game-board'>
-        <VStack m={20} spacing={5}>
+        <VStack m={10} spacing={5}>
           {brainShape.map((row, i) => (
             <BrainRow key={i} index={i} />
           ))}

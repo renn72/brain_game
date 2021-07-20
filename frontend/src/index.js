@@ -6,10 +6,11 @@ import reportWebVitals from './reportWebVitals'
 
 import { BrainProvider } from './context/BrainContext.js'
 import { ChakraProvider } from '@chakra-ui/react'
+import theme from './themes/theme'
 
 ReactDOM.render(
   <React.StrictMode>
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <BrainProvider>
         <App />
       </BrainProvider>
