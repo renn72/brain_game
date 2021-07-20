@@ -124,7 +124,7 @@ export default class MnistDataset {
     console.log('no data')
     this.dataset = await Promise.all([
       loadImages(TRAIN_IMAGES_FILE),
-      loadLabels(TRAIN_LALS_FILE),
+      loadLabels(TRAIN_LABELS_FILE),
       loadImages(TEST_IMAGES_FILE),
       loadLabels(TEST_LABELS_FILE),
     ])
