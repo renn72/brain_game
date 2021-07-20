@@ -12,6 +12,8 @@ import {
   DrawerContent,
   DrawerCloseButton,
   useDisclosure,
+  Flex,
+  Spacer,
 } from '@chakra-ui/react'
 
 import BrainStack from './components/BrainStack'
@@ -19,17 +21,15 @@ import { BrainContext } from './context/BrainContext'
 
 import sendModel from './service_objects/sendModel'
 
-function HighScore() {
-  const { isOpen, onOpen, onClose } = useDisclosure()
-
+function HighScore(props) {
+  const { isOpen, onClose } = props
   return (
     <>
-      <Drawer isOpen={!isOpen} placement='right' onClose={onOpen}>
+      <Drawer isOpen={isOpen} placement='right' onClose={onClose}>
         <DrawerOverlay />
         <DrawerContent bg='#161430' color='yellow.100'>
           <DrawerCloseButton />
           <DrawerHeader>HIGH SCORES</DrawerHeader>
-
           <DrawerBody>
             <Text>70.5 DAV</Text>
             <Text>70.5 DAV</Text>
@@ -40,7 +40,6 @@ function HighScore() {
             <Text>70.5 DAV</Text>
             <Text>70.5 DAV</Text>
           </DrawerBody>
-
           <DrawerFooter></DrawerFooter>
         </DrawerContent>
       </Drawer>
@@ -51,12 +50,19 @@ function HighScore() {
 function App() {
   const { brainShape } = useContext(BrainContext)
   const [acc, setAcc] = useState(0)
+  const { isOpen, onOpen, onClose } = useDisclosure(false)
 
   return (
     <div className='App'>
-      <header>
+      <Flex alignItems='center' p={4}>
+        <Button colorScheme='yellow'>INSTRUCTIONS</Button>
+        <Spacer />
         <Text fontSize='6xl'>BRAIN GAME</Text>
-      </header>
+        <Spacer />
+        <Button colorScheme='yellow' onClick={onOpen}>
+          HIGH SCORES
+        </Button>
+      </Flex>
       <BrainStack />
       <Button
         m={4}
@@ -67,7 +73,7 @@ function App() {
       >
         <Text fontSize='4xl'>{acc} %</Text>
       </Button>
-      <HighScore />
+      <HighScore isOpen={isOpen} onClose={onClose} />
 
       <footer></footer>
     </div>
