@@ -6,15 +6,18 @@ const router = express.Router()
 
 router.get('/', (req, res) => {
   console.log(req.session)
-  const dbResponse = HighScore.findAll()
-
-  res.json(dbResponse)
+  HighScore.findAll().then((dbResponse) => {
+    // console.log(dbResponse)
+    return res.json(dbResponse)
+  })
 })
 
 router.post('/', validateHighScore, (req, res) => {
-  Brain.create(req.body).then((accuracy) => {
-    res.status(201).json(accuracy)
-    console.log(accuracy)
+  HighScore.add(req.body).then((dbRes) => {
+    console.log(dbRes)
+    res.status(201).json({
+      message: 'new score placed',
+    })
   })
 })
 

@@ -1,50 +1,20 @@
-// import db from '../db/db.js'
+import fs from 'fs'
 
 const HighScore = {
-  findAll() {
-    const db = [
-      {
-        score: 76.7,
-        name: 'DT_',
-      },
-      {
-        score: 72.7,
-        name: 'CRS',
-      },
-      {
-        score: 70.1,
-        name: 'KAS',
-      },
-      {
-        score: 66.0,
-        name: 'DT_',
-      },
-      {
-        score: 62.2,
-        name: 'GEW',
-      },
-      {
-        score: 59.0,
-        name: 'DT_',
-      },
-      {
-        score: 56.7,
-        name: 'CRS',
-      },
-      {
-        score: 52.2,
-        name: 'CAM',
-      },
-      {
-        score: 49.9,
-        name: 'JAZ',
-      },
-      {
-        score: 32.1,
-        name: 'TOM',
-      },
-    ]
-    return db
+  async findAll() {
+    const data = fs.readFileSync('./backend/models/high_score.json', 'utf8')
+    const database = JSON.parse(data)
+    return database.sort((a, b) => b.score - a.score)
+  },
+  async add(newScore) {
+    const data = fs.readFileSync('./backend/models/high_score.json', 'utf8')
+    const database = JSON.parse(data)
+    database.push(newScore)
+    const newDatabase = JSON.stringify(
+      database.sort((a, b) => b.score - a.score)
+    )
+    fs.writeFileSync('./backend/models/high_score.json', newDatabase, 'utf8')
+    return true
   },
 }
 
