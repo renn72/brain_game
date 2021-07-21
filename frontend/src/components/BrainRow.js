@@ -13,11 +13,13 @@ export default function BrainRow(props) {
   for (let i = 0; i < brainShape[index]; i++) {
     row.push(<Neuron key={i} index={index} />)
   }
+
+  const type = index === 0 ? 'row1' : 'row'
   return (
     <div>
       <HStack spacing={8}>
         {row}
-        <AddButton handleClick={() => extendRow(index)} type='row' />
+        <AddButton handleClick={() => extendRow(index)} type={type} />
       </HStack>
     </div>
   )

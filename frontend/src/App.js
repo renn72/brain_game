@@ -7,15 +7,6 @@ import {
   useDisclosure,
   Flex,
   Spacer,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverHeader,
-  PopoverBody,
-  PopoverFooter,
-  PopoverCloseButton,
-  Box,
-  ButtonGroup,
   Tooltip,
 } from '@chakra-ui/react'
 
@@ -26,45 +17,6 @@ import { BrainContext } from './context/BrainContext'
 import { ToolTipsContext } from './context/ToolTipsContext'
 
 import sendModel from './service_objects/sendModel'
-
-function Instructions() {
-  const initialFocusRef = React.useRef()
-  return (
-    <Popover
-      initialFocusRef={initialFocusRef}
-      placement='bottom'
-      closeOnBlur={false}
-    >
-      <PopoverTrigger>
-        <Button colorScheme='yellow'>INSTRUCTIONS</Button>
-      </PopoverTrigger>
-      <PopoverContent color='yellow.400' bg='blue.900' borderColor='blue.800'>
-        <PopoverHeader pt={4} border='0'>
-          Train my Brain
-        </PopoverHeader>
-        <PopoverCloseButton />
-        <PopoverBody>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore.
-        </PopoverBody>
-        <PopoverFooter
-          border='0'
-          d='flex'
-          alignItems='center'
-          justifyContent='space-between'
-          pb={4}
-        >
-          <Box fontSize='sm'>Step 2 of 4</Box>
-          <ButtonGroup size='sm'>
-            <Button colorScheme='blue' ref={initialFocusRef}>
-              Next
-            </Button>
-          </ButtonGroup>
-        </PopoverFooter>
-      </PopoverContent>
-    </Popover>
-  )
-}
 
 function App() {
   const { brainShape } = useContext(BrainContext)
@@ -81,14 +33,30 @@ function App() {
         <Spacer />
         <Text fontSize='6xl'>BRAIN GAME</Text>
         <Spacer />
-        <Tooltip label='see high scores' isOpen={toolTips}>
+        <Tooltip
+          label='see high scores'
+          isOpen={toolTips}
+          bg='161430'
+          color='yellow.400'
+          borderWidth='1px'
+          borderRadius='lg'
+          borderColor='yellow.400'
+        >
           <Button colorScheme='yellow' onClick={onOpen}>
             HIGH SCORES
           </Button>
         </Tooltip>
       </Flex>
       <BrainStack />
-      <Tooltip label='run the brain' isOpen={toolTips}>
+      <Tooltip
+        label='run the brain'
+        isOpen={toolTips}
+        bg='161430'
+        color='yellow.400'
+        borderWidth='1px'
+        borderRadius='lg'
+        borderColor='yellow.400'
+      >
         <Button
           m={4}
           size='lg'
