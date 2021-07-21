@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals'
 
 import { BrainProvider } from './context/BrainContext.js'
 import { HighScoreProvider } from './context/HighScoreContext.js'
+import { ToolTipsProvider } from './context/ToolTipsContext.js'
 import { ChakraProvider } from '@chakra-ui/react'
 import theme from './themes/theme'
 
@@ -14,7 +15,9 @@ ReactDOM.render(
     <ChakraProvider theme={theme}>
       <BrainProvider>
         <HighScoreProvider>
-          <App />
+          <ToolTipsProvider>
+            <App />
+          </ToolTipsProvider>
         </HighScoreProvider>
       </BrainProvider>
     </ChakraProvider>

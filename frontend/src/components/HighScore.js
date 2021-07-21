@@ -12,6 +12,7 @@ import {
 } from '@chakra-ui/react'
 
 import { HighScoreContext } from '../context/HighScoreContext'
+import { ToolTipsContext } from '../context/ToolTipsContext'
 
 export default function HighScore(props) {
   const { isOpen, onClose } = props

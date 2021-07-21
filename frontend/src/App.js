@@ -16,13 +16,14 @@ import {
   PopoverCloseButton,
   Box,
   ButtonGroup,
-  useBoolean,
+  Tooltip,
 } from '@chakra-ui/react'
 
 import BrainStack from './components/BrainStack'
 import HighScore from './components/HighScore'
 
 import { BrainContext } from './context/BrainContext'
+import { ToolTipsContext } from './context/ToolTipsContext'
 
 import sendModel from './service_objects/sendModel'
 
@@ -67,9 +68,9 @@ function Instructions() {
 
 function App() {
   const { brainShape } = useContext(BrainContext)
+  const { toolTips, setToolTips } = useContext(ToolTipsContext)
   const [acc, setAcc] = useState(0)
   const { isOpen, onOpen, onClose } = useDisclosure(false)
-  const [toolTips, setToolTips] = useBoolean(false)
 
   return (
     <div className='App'>
@@ -80,20 +81,24 @@ function App() {
         <Spacer />
         <Text fontSize='6xl'>BRAIN GAME</Text>
         <Spacer />
-        <Button colorScheme='yellow' onClick={onOpen}>
-          HIGH SCORES
-        </Button>
+        <Tooltip label='see high scores' isOpen={toolTips}>
+          <Button colorScheme='yellow' onClick={onOpen}>
+            HIGH SCORES
+          </Button>
+        </Tooltip>
       </Flex>
       <BrainStack />
-      <Button
-        m={4}
-        size='lg'
-        p={8}
-        colorScheme='yellow'
-        onClick={() => sendModel(brainShape, setAcc)}
-      >
-        <Text fontSize='4xl'>{acc} %</Text>
-      </Button>
+      <Tooltip label='run the brain' isOpen={toolTips}>
+        <Button
+          m={4}
+          size='lg'
+          p={8}
+          colorScheme='yellow'
+          onClick={() => sendModel(brainShape, setAcc)}
+        >
+          <Text fontSize='4xl'>{acc} %</Text>
+        </Button>
+      </Tooltip>
       <HighScore isOpen={isOpen} onClose={onClose} />
 
       <footer></footer>
