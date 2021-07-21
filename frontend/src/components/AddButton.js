@@ -30,16 +30,17 @@ export default function AddButton(props) {
       label={label}
       placement={placement}
       isOpen={toolTips}
-      bg='161430'
+      bg='blue.900'
+      fontSize='2xl'
       color='yellow.400'
       borderWidth='1px'
       borderRadius='lg'
-      borderColor='yellow.400'
+      borderColor='purple.100'
     >
       <IconButton
-        color='yellow.100'
+        color='purple.100'
         variant='outline'
-        borderColor='yellow.100'
+        borderColor='purple.100'
         border='2px'
         icon={typeIcon}
         onClick={handleClick}

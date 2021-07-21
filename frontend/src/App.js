@@ -12,6 +12,7 @@ import {
 
 import BrainStack from './components/BrainStack'
 import HighScore from './components/HighScore'
+import Instructions from './components/Instructions'
 
 import { BrainContext } from './context/BrainContext'
 import { ToolTipsContext } from './context/ToolTipsContext'
@@ -20,27 +21,30 @@ import sendModel from './service_objects/sendModel'
 
 function App() {
   const { brainShape } = useContext(BrainContext)
-  const { toolTips, setToolTips } = useContext(ToolTipsContext)
+  const { toolTips } = useContext(ToolTipsContext)
   const [acc, setAcc] = useState(0)
   const { isOpen, onOpen, onClose } = useDisclosure(false)
+
+  const runButtonText = acc === 0 ? 'START' : `${acc} %`
 
   return (
     <div className='App'>
       <Flex alignItems='center' p={4}>
-        <Button colorScheme='yellow' onClick={setToolTips.toggle}>
-          INSTRUCTIONS
-        </Button>
+        <Instructions />
         <Spacer />
-        <Text fontSize='6xl'>BRAIN GAME</Text>
+        <Text fontSize='6xl' color='purple.100'>
+          BRAIN GAME
+        </Text>
         <Spacer />
         <Tooltip
-          label='see high scores'
+          label='high scores'
           isOpen={toolTips}
-          bg='161430'
+          bg='blue.900'
           color='yellow.400'
           borderWidth='1px'
           borderRadius='lg'
-          borderColor='yellow.400'
+          borderColor='purple.100'
+          fontSize='2xl'
         >
           <Button colorScheme='yellow' onClick={onOpen}>
             HIGH SCORES
@@ -55,7 +59,8 @@ function App() {
         color='yellow.400'
         borderWidth='1px'
         borderRadius='lg'
-        borderColor='yellow.400'
+        borderColor='purple.100'
+        fontSize='2xl'
       >
         <Button
           m={4}
@@ -64,12 +69,10 @@ function App() {
           colorScheme='yellow'
           onClick={() => sendModel(brainShape, setAcc)}
         >
-          <Text fontSize='4xl'>{acc} %</Text>
+          <Text fontSize='4xl'>{runButtonText}</Text>
         </Button>
       </Tooltip>
       <HighScore isOpen={isOpen} onClose={onClose} />
-
-      <footer></footer>
     </div>
   )
 }

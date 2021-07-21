@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useContext } from 'react'
 import {
   Button,
   Popover,
@@ -6,14 +6,14 @@ import {
   PopoverContent,
   PopoverHeader,
   PopoverBody,
-  PopoverFooter,
-  PopoverCloseButton,
-  Box,
-  ButtonGroup,
 } from '@chakra-ui/react'
+
+import { ToolTipsContext } from '../context/ToolTipsContext'
 
 export default function Instructions() {
   const initialFocusRef = useRef()
+  const { setToolTips } = useContext(ToolTipsContext)
+
   return (
     <Popover
       initialFocusRef={initialFocusRef}
@@ -21,31 +21,15 @@ export default function Instructions() {
       closeOnBlur={false}
     >
       <PopoverTrigger>
-        <Button colorScheme='yellow'>INSTRUCTIONS</Button>
+        <Button colorScheme='yellow' onClick={setToolTips.toggle}>
+          INSTRUCTIONS
+        </Button>
       </PopoverTrigger>
-      <PopoverContent color='yellow.400' bg='blue.900' borderColor='blue.800'>
+      <PopoverContent color='yellow.400' bg='blue.900' borderColor='purple.100'>
         <PopoverHeader pt={4} border='0'>
           Train my Brain
         </PopoverHeader>
-        <PopoverCloseButton />
-        <PopoverBody>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore.
-        </PopoverBody>
-        <PopoverFooter
-          border='0'
-          d='flex'
-          alignItems='center'
-          justifyContent='space-between'
-          pb={4}
-        >
-          <Box fontSize='sm'>Step 2 of 4</Box>
-          <ButtonGroup size='sm'>
-            <Button colorScheme='blue' ref={initialFocusRef}>
-              Next
-            </Button>
-          </ButtonGroup>
-        </PopoverFooter>
+        <PopoverBody>Build a network neurons</PopoverBody>
       </PopoverContent>
     </Popover>
   )
