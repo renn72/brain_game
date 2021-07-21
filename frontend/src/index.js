@@ -5,6 +5,7 @@ import App from './App'
 import reportWebVitals from './reportWebVitals'
 
 import { BrainProvider } from './context/BrainContext.js'
+import { HighScoreProvider } from './context/HighScoreContext.js'
 import { ChakraProvider } from '@chakra-ui/react'
 import theme from './themes/theme'
 
@@ -12,7 +13,9 @@ ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
       <BrainProvider>
-        <App />
+        <HighScoreProvider>
+          <App />
+        </HighScoreProvider>
       </BrainProvider>
     </ChakraProvider>
   </React.StrictMode>,

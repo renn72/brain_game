@@ -13,7 +13,7 @@ const HighScore = {
       },
       {
         score: 70.1,
-        name: 'DAV',
+        name: 'KAS',
       },
       {
         score: 66.0,
@@ -21,7 +21,7 @@ const HighScore = {
       },
       {
         score: 62.2,
-        name: 'DT_',
+        name: 'GEW',
       },
       {
         score: 59.0,
@@ -33,11 +33,11 @@ const HighScore = {
       },
       {
         score: 52.2,
-        name: 'REN',
+        name: 'CAM',
       },
       {
         score: 49.9,
-        name: 'REN',
+        name: 'JAZ',
       },
       {
         score: 32.1,

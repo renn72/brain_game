@@ -4,46 +4,64 @@ import React, { useContext, useState } from 'react'
 import {
   Text,
   Button,
-  Drawer,
-  DrawerBody,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
   useDisclosure,
   Flex,
   Spacer,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverHeader,
+  PopoverBody,
+  PopoverFooter,
+  PopoverCloseButton,
+  Box,
+  ButtonGroup,
+  useBoolean,
 } from '@chakra-ui/react'
 
 import BrainStack from './components/BrainStack'
+import HighScore from './components/HighScore'
+
 import { BrainContext } from './context/BrainContext'
 
 import sendModel from './service_objects/sendModel'
 
-function HighScore(props) {
-  const { isOpen, onClose } = props
+function Instructions() {
+  const initialFocusRef = React.useRef()
   return (
-    <>
-      <Drawer isOpen={isOpen} placement='right' onClose={onClose}>
-        <DrawerOverlay />
-        <DrawerContent bg='#161430' color='yellow.100'>
-          <DrawerCloseButton />
-          <DrawerHeader>HIGH SCORES</DrawerHeader>
-          <DrawerBody>
-            <Text>70.5 DAV</Text>
-            <Text>70.5 DAV</Text>
-            <Text>70.5 DAV</Text>
-            <Text>70.5 DAV</Text>
-            <Text>70.5 DAV</Text>
-            <Text>70.5 DAV</Text>
-            <Text>70.5 DAV</Text>
-            <Text>70.5 DAV</Text>
-          </DrawerBody>
-          <DrawerFooter></DrawerFooter>
-        </DrawerContent>
-      </Drawer>
-    </>
+    <Popover
+      initialFocusRef={initialFocusRef}
+      placement='bottom'
+      closeOnBlur={false}
+    >
+      <PopoverTrigger>
+        <Button colorScheme='yellow'>INSTRUCTIONS</Button>
+      </PopoverTrigger>
+      <PopoverContent color='yellow.400' bg='blue.900' borderColor='blue.800'>
+        <PopoverHeader pt={4} border='0'>
+          Train my Brain
+        </PopoverHeader>
+        <PopoverCloseButton />
+        <PopoverBody>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore.
+        </PopoverBody>
+        <PopoverFooter
+          border='0'
+          d='flex'
+          alignItems='center'
+          justifyContent='space-between'
+          pb={4}
+        >
+          <Box fontSize='sm'>Step 2 of 4</Box>
+          <ButtonGroup size='sm'>
+            <Button colorScheme='blue' ref={initialFocusRef}>
+              Next
+            </Button>
+          </ButtonGroup>
+        </PopoverFooter>
+      </PopoverContent>
+    </Popover>
   )
 }
 
@@ -51,11 +69,14 @@ function App() {
   const { brainShape } = useContext(BrainContext)
   const [acc, setAcc] = useState(0)
   const { isOpen, onOpen, onClose } = useDisclosure(false)
+  const [toolTips, setToolTips] = useBoolean(false)
 
   return (
     <div className='App'>
       <Flex alignItems='center' p={4}>
-        <Button colorScheme='yellow'>INSTRUCTIONS</Button>
+        <Button colorScheme='yellow' onClick={setToolTips.toggle}>
+          INSTRUCTIONS
+        </Button>
         <Spacer />
         <Text fontSize='6xl'>BRAIN GAME</Text>
         <Spacer />

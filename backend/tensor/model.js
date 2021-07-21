@@ -6,14 +6,14 @@ const buildModel = (modelData) => {
   model.add(
     tf.layers.conv2d({
       inputShape: [28, 28, 1],
-      filters: 8,
+      filters: 4,
       kernelSize: 3,
       activation: 'relu',
     })
   )
   model.add(tf.layers.dropout({ rate: 0.25 }))
   model.add(tf.layers.maxPooling2d({ poolSize: [2, 2] }))
-  model.add(tf.layers.dropout({ rate: 0.25 }))
+  // model.add(tf.layers.dropout({ rate: 0.25 }))
   model.add(tf.layers.flatten())
 
   modelData.forEach((layer) => {
