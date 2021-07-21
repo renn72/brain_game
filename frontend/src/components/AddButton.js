@@ -4,7 +4,7 @@ import { AddIcon, ChevronDownIcon } from '@chakra-ui/icons'
 import { ToolTipsContext } from '../context/ToolTipsContext'
 
 export default function AddButton(props) {
-  const { handleClick, type } = props
+  const { handleClick, type, display } = props
   const { toolTips } = useContext(ToolTipsContext)
 
   const typeIcon =
@@ -25,11 +25,13 @@ export default function AddButton(props) {
     placement = 'bottom'
   }
 
+  const isVisible = display ? 'flex' : 'none'
+
   return (
     <Tooltip
       label={label}
       placement={placement}
-      isOpen={toolTips}
+      isOpen={toolTips && display}
       bg='blue.900'
       fontSize='2xl'
       color='yellow.400'
@@ -42,6 +44,7 @@ export default function AddButton(props) {
         variant='outline'
         borderColor='purple.100'
         border='2px'
+        d={isVisible}
         icon={typeIcon}
         onClick={handleClick}
         borderRadius='20px'

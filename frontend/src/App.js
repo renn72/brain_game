@@ -12,7 +12,7 @@ import {
 
 import BrainStack from './components/BrainStack'
 import HighScore from './components/HighScore'
-import Instructions from './components/Instructions'
+import Header from './components/Header'
 
 import { BrainContext } from './context/BrainContext'
 import { ToolTipsContext } from './context/ToolTipsContext'
@@ -20,7 +20,7 @@ import { ToolTipsContext } from './context/ToolTipsContext'
 import sendModel from './service_objects/sendModel'
 
 function App() {
-  const { brainShape } = useContext(BrainContext)
+  const { brainShape, resetBrain } = useContext(BrainContext)
   const { toolTips } = useContext(ToolTipsContext)
   const [acc, setAcc] = useState(0)
   const { isOpen, onOpen, onClose } = useDisclosure(false)
@@ -29,49 +29,64 @@ function App() {
 
   return (
     <div className='App'>
-      <Flex alignItems='center' p={4}>
-        <Instructions />
+      <Flex flexDirection='column' h='100vh'>
+        <Header onOpen={onOpen} />
+        <BrainStack />
         <Spacer />
-        <Text fontSize='6xl' color='purple.100'>
-          BRAIN GAME
-        </Text>
-        <Spacer />
-        <Tooltip
-          label='high scores'
-          isOpen={toolTips}
-          bg='blue.900'
-          color='yellow.400'
-          borderWidth='1px'
-          borderRadius='lg'
-          borderColor='purple.100'
-          fontSize='2xl'
-        >
-          <Button colorScheme='yellow' onClick={onOpen}>
-            HIGH SCORES
-          </Button>
-        </Tooltip>
+        <div>
+          <div>
+            <Tooltip
+              label='run the brain'
+              isOpen={toolTips}
+              bg='blue.900'
+              color='yellow.400'
+              borderWidth='1px'
+              borderRadius='lg'
+              borderColor='purple.100'
+              fontSize='2xl'
+              placement='right'
+            >
+              <Button
+                m={4}
+                size='lg'
+                p={8}
+                colorScheme='yellow'
+                onClick={() => sendModel(brainShape, setAcc)}
+              >
+                <Text fontSize='4xl'>{runButtonText}</Text>
+              </Button>
+            </Tooltip>
+          </div>
+
+          <Tooltip
+            label='reset the brain to 3 x 3'
+            isOpen={toolTips}
+            bg='blue.900'
+            color='yellow.400'
+            borderWidth='1px'
+            borderRadius='lg'
+            borderColor='purple.100'
+            fontSize='2xl'
+            placement='right'
+          >
+            <Button
+              m={2}
+              size='xs'
+              bg='blue.900'
+              color='purple.100'
+              borderWidth='1px'
+              borderRadius='lg'
+              borderColor='purple.100'
+              onClick={resetBrain}
+              _hover={{}}
+              _focus={{}}
+              _active={{}}
+            >
+              <Text fontSize='sm'>reset</Text>
+            </Button>
+          </Tooltip>
+        </div>
       </Flex>
-      <BrainStack />
-      <Tooltip
-        label='run the brain'
-        isOpen={toolTips}
-        bg='161430'
-        color='yellow.400'
-        borderWidth='1px'
-        borderRadius='lg'
-        borderColor='purple.100'
-        fontSize='2xl'
-      >
-        <Button
-          m={4}
-          size='lg'
-          p={8}
-          colorScheme='yellow'
-          onClick={() => sendModel(brainShape, setAcc)}
-        >
-          <Text fontSize='4xl'>{runButtonText}</Text>
-        </Button>
-      </Tooltip>
       <HighScore isOpen={isOpen} onClose={onClose} />
     </div>
   )

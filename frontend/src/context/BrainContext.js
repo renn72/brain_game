@@ -25,10 +25,20 @@ export const BrainProvider = ({ children }) => {
           ...newBrainShape.filter((value, index) => row !== index),
         ])
   }
+  const resetBrain = () => {
+    setBrainShape([3, 3, 3])
+  }
 
   return (
     <BrainContext.Provider
-      value={{ brainShape, addRow, removeRow, extendRow, shrinkRow }}
+      value={{
+        brainShape,
+        addRow,
+        removeRow,
+        extendRow,
+        shrinkRow,
+        resetBrain,
+      }}
     >
       {children}
     </BrainContext.Provider>

@@ -7,7 +7,6 @@ import {
   DrawerHeader,
   DrawerOverlay,
   DrawerContent,
-  DrawerCloseButton,
   Grid,
 } from '@chakra-ui/react'
 
@@ -26,7 +25,6 @@ export default function HighScore(props) {
       <Drawer isOpen={isOpen} placement='right' onClose={onClose}>
         <DrawerOverlay />
         <DrawerContent bg='#161430' color='yellow.100'>
-          <DrawerCloseButton />
           <DrawerHeader align='center' fontSize='3xl'>
             HIGH SCORES
           </DrawerHeader>

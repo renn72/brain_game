@@ -14,7 +14,11 @@ export default function BrainStack() {
         {brainShape.map((row, i) => (
           <BrainRow key={i} index={i} />
         ))}
-        <AddButton handleClick={addRow} type='stack' />
+        <AddButton
+          handleClick={addRow}
+          type='stack'
+          display={brainShape.length < 8}
+        />
       </VStack>
     </section>
   )

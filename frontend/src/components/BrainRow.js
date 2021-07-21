@@ -19,7 +19,11 @@ export default function BrainRow(props) {
     <div>
       <HStack spacing={8}>
         {row}
-        <AddButton handleClick={() => extendRow(index)} type={type} />
+        <AddButton
+          handleClick={() => extendRow(index)}
+          type={type}
+          display={brainShape[index] < 10}
+        />
       </HStack>
     </div>
   )
