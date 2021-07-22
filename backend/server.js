@@ -27,7 +27,7 @@ app.use(express.json())
 app.use('/api/brain', brainController)
 app.use('/api/high_score', highScoreController)
 
-if (process.env.NODE_ENV == 'production') {
+if (process.env.NODE_ENV === 'production') {
   const __dirname = path.resolve()
 
   app.use(express.static(path.join(__dirname, '/frontend/build')))

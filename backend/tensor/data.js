@@ -1,54 +1,36 @@
 import tf from '@tensorflow/tfjs'
-import assert from 'assert'
+// import assert from 'assert'
 import fs from 'fs'
-import https from 'https'
 import util from 'util'
-import zlib from 'zlib'
 
 const readFile = util.promisify(fs.readFile)
 
-// MNIST data constants:
-// const BASE_URL = 'https://storage.googleapis.com/cvdf-datasets/mnist/'
-// const TRAIN_IMAGES_FILE = 'train-images-idx3-ubyte'
-// const TRAIN_LABELS_FILE = 'train-labels-idx1-ubyte'
 const TRAIN_IMAGES_FILE = './backend/tensor/t10k-images-idx3-ubyte'
 const TRAIN_LABELS_FILE = './backend/tensor/t10k-labels-idx1-ubyte'
-const TEST_IMAGES_FILE = './backend/tensor/t10k-images-idx3-ubyte'
-const TEST_LABELS_FILE = './backend/tensor/t10k-labels-idx1-ubyte'
-const IMAGE_HEADER_MAGIC_NUM = 2051
+// const TEST_IMAGES_FILE = './backend/tensor/t10k-images-idx3-ubyte'
+// const TEST_LABELS_FILE = './backend/tensor/t10k-labels-idx1-ubyte'
+// const IMAGE_HEADER_MAGIC_NUM = 2051
 const IMAGE_HEADER_BYTES = 16
 const IMAGE_HEIGHT = 28
 const IMAGE_WIDTH = 28
 const IMAGE_FLAT_SIZE = IMAGE_HEIGHT * IMAGE_WIDTH
-const LABEL_HEADER_MAGIC_NUM = 2049
+// const LABEL_HEADER_MAGIC_NUM = 2049
 const LABEL_HEADER_BYTES = 8
 const LABEL_RECORD_BYTE = 1
 const LABEL_FLAT_SIZE = 10
 
-// Downloads a test file only once and returns the buffer for the file.
 async function fetchOnceAndSaveToDiskWithBuffer(filename) {
   return new Promise((resolve) => {
-    // const url = `${BASE_URL}${filename}.gz`
     if (fs.existsSync(filename)) {
       resolve(readFile(filename))
       return
     }
-    // const file = fs.createWriteStream(filename)
-    // console.log(`  * Downloading from: ${url}`)
-    // https.get(url, (response) => {
-    //   const unzip = zlib.createGunzip()
-    //   response.pipe(unzip).pipe(file)
-    //   unzip.on('end', () => {
-    //     resolve(readFile(filename))
-    //   })
-    // })
   })
 }
 
 function loadHeaderValues(buffer, headerLength) {
   const headerValues = []
   for (let i = 0; i < headerLength / 4; i++) {
-    // Header data is stored in-order (aka big-endian)
     headerValues[i] = buffer.readUInt32BE(i * 4)
   }
   return headerValues
@@ -61,23 +43,21 @@ async function loadImages(filename) {
   const recordBytes = IMAGE_HEIGHT * IMAGE_WIDTH
 
   const headerValues = loadHeaderValues(buffer, headerBytes)
-  assert.equal(headerValues[0], IMAGE_HEADER_MAGIC_NUM)
-  assert.equal(headerValues[2], IMAGE_HEIGHT)
-  assert.equal(headerValues[3], IMAGE_WIDTH)
+  // assert.equal(headerValues[0], IMAGE_HEADER_MAGIC_NUM)
+  // assert.equal(headerValues[2], IMAGE_HEIGHT)
+  // assert.equal(headerValues[3], IMAGE_WIDTH)
 
   const images = []
   let index = headerBytes
   while (index < buffer.byteLength) {
     const array = new Float32Array(recordBytes)
     for (let i = 0; i < recordBytes; i++) {
-      // Normalize the pixel values into the 0-1 interval, from
-      // the original 0-255 interval.
       array[i] = buffer.readUInt8(index++) / 255
     }
     images.push(array)
   }
 
-  assert.equal(images.length, headerValues[1])
+  // assert.equal(images.length, headerValues[1])
   return images
 }
 
@@ -88,7 +68,7 @@ async function loadLabels(filename) {
   const recordBytes = LABEL_RECORD_BYTE
 
   const headerValues = loadHeaderValues(buffer, headerBytes)
-  assert.equal(headerValues[0], LABEL_HEADER_MAGIC_NUM)
+  // assert.equal(headerValues[0], LABEL_HEADER_MAGIC_NUM)
 
   const labels = []
   let index = headerBytes
@@ -100,7 +80,7 @@ async function loadLabels(filename) {
     labels.push(array)
   }
 
-  assert.equal(labels.length, headerValues[1])
+  // assert.equal(labels.length, headerValues[1])
   return labels
 }
 
@@ -125,21 +105,21 @@ export default class MnistDataset {
     this.dataset = await Promise.all([
       loadImages(TRAIN_IMAGES_FILE),
       loadLabels(TRAIN_LABELS_FILE),
-      loadImages(TEST_IMAGES_FILE),
-      loadLabels(TEST_LABELS_FILE),
+      // loadImages(TEST_IMAGES_FILE),
+      // loadLabels(TEST_LABELS_FILE),
     ])
     console.log('loaded data')
     this.trainSize = this.dataset[0].length
-    this.testSize = this.dataset[2].length
+    // this.testSize = this.dataset[2].length
   }
 
   getTrainData() {
     return this.getData_(true)
   }
 
-  getTestData() {
-    return this.getData_(false)
-  }
+  // getTestData() {
+  //   return this.getData_(false)
+  // }
 
   getData_(isTrainingData) {
     let imagesIndex
@@ -147,16 +127,17 @@ export default class MnistDataset {
     if (isTrainingData) {
       imagesIndex = 0
       labelsIndex = 1
-    } else {
-      imagesIndex = 2
-      labelsIndex = 3
     }
+    //else {
+    //   imagesIndex = 2
+    //   labelsIndex = 3
+    // }
     const size = this.dataset[imagesIndex].length
-    tf.util.assert(
-      this.dataset[labelsIndex].length === size,
-      `Mismatch in the number of images (${size}) and ` +
-        `the number of labels (${this.dataset[labelsIndex].length})`
-    )
+    // tf.util.assert(
+    //   this.dataset[labelsIndex].length === size,
+    //   `Mismatch in the number of images (${size}) and ` +
+    //     `the number of labels (${this.dataset[labelsIndex].length})`
+    // )
 
     // Only create one big array to hold batch of images.
     const imagesShape = [size, IMAGE_HEIGHT, IMAGE_WIDTH, 1]
@@ -180,5 +161,3 @@ export default class MnistDataset {
     }
   }
 }
-
-// module.exports = new MnistDataset()

@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node backend/server",
+    "inspect": "node --inspect backend/server",
     "client": "npm start --prefix frontend",
     "server": "nodemon backend/server.js --ignore 'backend/models/high_score.json'",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
