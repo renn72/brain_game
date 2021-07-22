@@ -1,18 +1,40 @@
 import React, { useContext, useState } from 'react'
+import RingLoader from 'react-spinners/RingLoader'
 
-import { Text, Button, Tooltip } from '@chakra-ui/react'
+import { Text, Button, Tooltip, useBoolean } from '@chakra-ui/react'
 
 import { BrainContext } from '../context/BrainContext'
 import { ToolTipsContext } from '../context/ToolTipsContext'
+import { HighScoreContext } from '../context/HighScoreContext'
 
 import sendModel from '../service_objects/sendModel'
 
-export default function StartResetButtons() {
+import NewHighScore from './NewHighScore'
+
+export default function StartResetButtons(props) {
   const { brainShape, resetBrain } = useContext(BrainContext)
   const { toolTips } = useContext(ToolTipsContext)
+  const { highScore } = useContext(HighScoreContext)
+
+  const [openNewHighScore, setOpenNewHighScore] = useBoolean()
+
   const [acc, setAcc] = useState(0)
+  const [token, setToken] = useState()
+  const { thinking, setThinking } = props
 
   const runButtonText = acc === 0 ? 'START' : `${acc} %`
+
+  const handleStart = async () => {
+    setThinking(true)
+
+    sendModel(brainShape, setAcc, setThinking, setToken, highScore).then(
+      (isHighScore) => {
+        if (isHighScore) {
+          setTimeout(() => setOpenNewHighScore.on(), 700)
+        }
+      }
+    )
+  }
 
   return (
     <div>
@@ -33,7 +55,9 @@ export default function StartResetButtons() {
             size='lg'
             p={8}
             colorScheme='yellow'
-            onClick={() => sendModel(brainShape, setAcc)}
+            isLoading={thinking}
+            spinner={<RingLoader />}
+            onClick={handleStart}
           >
             <Text fontSize='4xl'>{runButtonText}</Text>
           </Button>
@@ -66,6 +90,12 @@ export default function StartResetButtons() {
           <Text fontSize='sm'>reset</Text>
         </Button>
       </Tooltip>
+      <NewHighScore
+        isOpen={openNewHighScore}
+        onClose={setOpenNewHighScore}
+        acc={acc}
+        token={token}
+      />
     </div>
   )
 }

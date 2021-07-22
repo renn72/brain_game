@@ -24,7 +24,7 @@ export default function HighScore(props) {
     <>
       <Drawer isOpen={isOpen} placement='right' onClose={onClose}>
         <DrawerOverlay />
-        <DrawerContent bg='#161430' color='yellow.100' opacity={0.9}>
+        <DrawerContent bg='#161430' color='yellow.200' opacity={0.8}>
           <DrawerHeader align='center' fontSize='3xl'>
             HIGH SCORES
           </DrawerHeader>
@@ -40,7 +40,7 @@ export default function HighScore(props) {
                       {score.name}
                     </Text>
                     <Text fontSize='2xl' textAlign='center'>
-                      {score.score.toFixed(1)}
+                      {Number(score.score).toFixed(1)}
                     </Text>
                   </Grid>
                 )

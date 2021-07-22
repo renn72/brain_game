@@ -8,8 +8,7 @@ export const HighScoreProvider = ({ children }) => {
 
   const getHighScore = async () => {
     const res = await axios.get('api/high_score')
-    console.log(res.data)
-    setHighScore(res.data)
+    setHighScore(res.data.slice(0, 10))
   }
 
   return (

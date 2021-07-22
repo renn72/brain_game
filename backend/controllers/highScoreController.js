@@ -5,9 +5,7 @@ import HighScore from '../models/high_score.js'
 const router = express.Router()
 
 router.get('/', (req, res) => {
-  console.log(req.session)
   HighScore.findAll().then((dbResponse) => {
-    // console.log(dbResponse)
     return res.json(dbResponse)
   })
 })

@@ -1,6 +1,14 @@
 import axios from 'axios'
 
-export default function sendModel(brainShape, setAcc) {
+import highScoreCheck from './highScoreCheck'
+
+export default async function sendModel(
+  brainShape,
+  setAcc,
+  setThinking,
+  setToken,
+  highScore
+) {
   const actFunc = 'relu'
 
   const data = brainShape.map((layer) => {
@@ -10,18 +18,14 @@ export default function sendModel(brainShape, setAcc) {
     }
   })
 
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  }
-
-  console.log(data)
-  axios
-    .post('/api/brain', data, config)
+  return axios
+    .post('/api/brain', data)
     .then((res) => {
-      console.log(res.data)
-      setAcc((res.data * 100).toFixed(1))
+      const { accuracy, token } = res.data
+      setAcc(Number(accuracy).toFixed(1))
+      setToken(token)
+      setThinking(false)
+      return highScoreCheck(accuracy, highScore)
     })
     .catch((err) => {
       console.error(err)
