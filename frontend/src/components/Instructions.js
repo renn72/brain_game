@@ -56,7 +56,7 @@ export default function Instructions() {
           <Text>green : tanh</Text>
           <Text>blue : elu</Text>
           <Text my={4}>
-            each model gets trained over a 10,000 sample set with 2 epochs
+            each model gets trained over a 10,000 sample set over 1 epoch
           </Text>
         </PopoverBody>
       </PopoverContent>
