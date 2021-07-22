@@ -2,6 +2,7 @@ import express from 'express'
 
 import morgan from 'morgan'
 import dotenv from 'dotenv'
+import path from 'path'
 
 import errorHandler from './middlewares/error_handler.js'
 
@@ -29,8 +30,8 @@ app.use('/api/brain', brainController)
 app.use('/api/high_score', highScoreController)
 
 if (process.env.NODE_ENV === 'production') {
-  const path = require('path')
   const __dirname = path.resolve()
+
   app.use(express.static(path.join(__dirname, '/frontend/build')))
 
   app.get('/*', (req, res) => {
