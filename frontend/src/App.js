@@ -1,7 +1,7 @@
 import './App.css'
 import React, { useState } from 'react'
 
-import { useDisclosure, Flex, Spacer, Button } from '@chakra-ui/react'
+import { useDisclosure, Flex, Spacer } from '@chakra-ui/react'
 
 import BrainStack from './components/BrainStack'
 import HighScore from './components/HighScore'

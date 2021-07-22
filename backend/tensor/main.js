@@ -4,21 +4,20 @@ import MnistDataset from './data.js'
 import buildModel from './model.js'
 
 const data = new MnistDataset()
-await data.loadData()
 
-const { images: trainImages, labels: trainLabels } = data.getTrainData()
 // const { images: testImages, labels: testLabels } = data.getTestData()
 
 async function runBrain(epochs, batchSize, modelData) {
   console.log('start:', tf.memory().numTensors)
   tf.engine().startScope()
 
+  await data.loadData()
+  const { images: trainImages, labels: trainLabels } = data.getTrainData()
   const model = buildModel(modelData)
 
   model.summary()
 
   const validationSplit = 0.2
-  console.log('pre fit:', tf.memory().numTensors)
 
   await model.fit(trainImages, trainLabels, {
     epochs,
@@ -28,8 +27,6 @@ async function runBrain(epochs, batchSize, modelData) {
 
   const evalOutput = model.evaluate(trainImages, trainLabels)
 
-  console.log('post fit:', tf.memory().numTensors)
-
   console.log(
     `\nEvaluation result:\n` +
       `  Loss = ${evalOutput[0].dataSync()[0].toFixed(5)}; ` +
@@ -37,7 +34,7 @@ async function runBrain(epochs, batchSize, modelData) {
   )
   let accuracy = evalOutput[1].dataSync()[0].toFixed(3)
 
-  tf.dispose(model)
+  // tf.dispose(model)
 
   tf.disposeVariables()
   tf.engine().endScope()

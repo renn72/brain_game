@@ -19,7 +19,7 @@ import { HighScoreContext } from '../context/HighScoreContext'
 import sendHighScore from '../service_objects/sendHighScore'
 
 export default function HighScore(props) {
-  const { isOpen, onClose, acc, token } = props
+  const { isOpen, onClose, token } = props
   const { highScore, getHighScore } = useContext(HighScoreContext)
   const [name, setName] = useState(['_', '_', '_'])
   const [currentLetter, setCurrentLetter] = useState(0)

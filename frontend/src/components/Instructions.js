@@ -29,7 +29,10 @@ export default function Instructions() {
         <PopoverHeader pt={4} border='0'>
           Train my Brain
         </PopoverHeader>
-        <PopoverBody>Build a network neurons</PopoverBody>
+        <PopoverBody>
+          Build a network neurons by adding and extending layers, when you think
+          you have good layout, hit start and see if can get a high score!
+        </PopoverBody>
       </PopoverContent>
     </Popover>
   )

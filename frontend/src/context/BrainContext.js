@@ -3,7 +3,7 @@ import React, { useState, createContext } from 'react'
 export const BrainContext = createContext()
 
 export const BrainProvider = ({ children }) => {
-  const [brainShape, setBrainShape] = useState([3, 3, 3])
+  const [brainShape, setBrainShape] = useState([5, 5, 5, 5, 5])
 
   const addRow = () =>
     setBrainShape([...brainShape, brainShape[brainShape.length - 1]])
