@@ -22,7 +22,7 @@ const buildModel = (modelData) => {
     )
   })
 
-  model.add(tf.layers.dense({ units: 10, activation: 'relu' }))
+  model.add(tf.layers.dense({ units: 10, activation: 'softmax' }))
 
   const optimizer = 'adam'
   model.compile({

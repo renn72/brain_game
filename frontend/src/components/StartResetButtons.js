@@ -64,7 +64,7 @@ export default function StartResetButtons(props) {
         </Tooltip>
       </div>
       <Tooltip
-        label='reset the brain to 3 x 3'
+        label='reset the brain to 5 x 5'
         isOpen={toolTips}
         bg='blue.900'
         color='yellow.400'
@@ -83,6 +83,7 @@ export default function StartResetButtons(props) {
           borderRadius='lg'
           borderColor='purple.100'
           onClick={resetBrain}
+          onMouseDown={() => setThinking(false)}
           _hover={{}}
           _focus={{}}
           _active={{}}

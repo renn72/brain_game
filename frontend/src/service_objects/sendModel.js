@@ -9,14 +9,16 @@ export default async function sendModel(
   setToken,
   highScore
 ) {
-  const actFunc = 'relu'
+  const actFunc = ['elu', 'relu', 'softmax', 'sigmoid', 'tanh']
 
   const data = brainShape.map((layer) => {
     return {
-      units: layer * layer * 10,
-      activation: actFunc,
+      units: layer.size * layer.size * 10,
+      activation: actFunc[layer.type],
     }
   })
+
+  console.log(data)
 
   return axios
     .post('/api/brain', data)
