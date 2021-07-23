@@ -64,7 +64,7 @@ export default function StartResetButtons(props) {
         </Tooltip>
       </div>
       <Tooltip
-        label='reset the brain to 5 x 5'
+        label='reset the brain to 4 x 4'
         isOpen={toolTips}
         bg='blue.900'
         color='yellow.400'

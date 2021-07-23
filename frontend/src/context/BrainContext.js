@@ -4,11 +4,10 @@ export const BrainContext = createContext()
 
 export const BrainProvider = ({ children }) => {
   const [brainShape, setBrainShape] = useState([
-    { type: 1, size: 5 },
-    { type: 1, size: 5 },
-    { type: 1, size: 5 },
-    { type: 1, size: 5 },
-    { type: 1, size: 5 },
+    { type: 1, size: 4 },
+    { type: 1, size: 4 },
+    { type: 1, size: 4 },
+    { type: 1, size: 4 },
   ])
 
   const addRow = () =>
@@ -49,11 +48,10 @@ export const BrainProvider = ({ children }) => {
   }
   const resetBrain = () => {
     setBrainShape([
-      { type: 1, size: 5 },
-      { type: 1, size: 5 },
-      { type: 1, size: 5 },
-      { type: 1, size: 5 },
-      { type: 1, size: 5 },
+      { type: 1, size: 4 },
+      { type: 1, size: 4 },
+      { type: 1, size: 4 },
+      { type: 1, size: 4 },
     ])
   }
 
