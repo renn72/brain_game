@@ -16,7 +16,6 @@ const HighScore = {
     let score = highScoreTokens.filter(
       (highScore) => highScore.token === newScore.token
     )
-    console.log(score)
     if (score.length === 1) {
       const data = fs.readFileSync('./backend/models/high_score.json', 'utf8')
       const database = JSON.parse(data).sort((a, b) => b.score - a.score)
@@ -41,14 +40,12 @@ const HighScore = {
     const token = rack()
 
     if (score * 100 > database[9].score) {
-      console.log('high score')
       highScoreTokens.push({
         score: (score * 100).toFixed(1),
         token: token,
       })
       console.log(highScoreTokens)
     }
-    console.log(token)
     return { accuracy: score, token: token }
   },
 }

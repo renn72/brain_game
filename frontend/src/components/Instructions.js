@@ -36,12 +36,12 @@ export default function Instructions() {
           Train my Brain
         </PopoverHeader>
         <PopoverBody>
-          <Text>
+          <Text mb={16}>
             Build a network neurons by adding and extending layers, when you
             think you have good layout, hit start and see if can get a high
             score!
           </Text>
-          <Text m={4}>Technical Information</Text>
+          <Text m={2}>Technical Information</Text>
           <Text my={2}>
             The neural network gets trained against the MINST hand written
             numbers set

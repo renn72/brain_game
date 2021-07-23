@@ -13,7 +13,6 @@ const buildModel = (modelData) => {
   )
   model.add(tf.layers.dropout({ rate: 0.25 }))
   model.add(tf.layers.maxPooling2d({ poolSize: [2, 2] }))
-  model.add(tf.layers.dropout({ rate: 0.25 }))
   model.add(tf.layers.flatten())
 
   modelData.forEach((layer) => {
