@@ -17,11 +17,11 @@ export default function AddButton(props) {
   let label = ''
   let placement = 'Bottom'
   if (type === 'row1') {
-    label = 'extend layer'
+    label = 'extend the layer'
     placement = 'right'
   }
   if (type === 'stack') {
-    label = 'add layer'
+    label = 'add a new layer'
     placement = 'bottom'
   }
 

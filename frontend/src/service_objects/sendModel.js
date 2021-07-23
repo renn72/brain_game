@@ -13,7 +13,7 @@ export default async function sendModel(
 
   const data = brainShape.map((layer) => {
     return {
-      units: layer.size * layer.size * 10,
+      units: layer.size * layer.size * 5,
       activation: actFunc[layer.type],
     }
   })

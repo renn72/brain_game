@@ -19,12 +19,17 @@ export default function BrainRow(props) {
     row.push(<Neuron key={i} index={index} />)
   }
 
-  const type = index === 0 ? 'row1' : 'row'
+  const type = index === Math.floor(brainShape.length / 2) ? 'row1' : 'row'
+
   return (
     <div>
       <HStack spacing={8}>
         <Tooltip
-          label={index === 2 ? 'change the type of neurons' : ''}
+          label={
+            index === Math.floor(brainShape.length / 2)
+              ? 'change the type of neurons'
+              : ''
+          }
           placement='left'
           isOpen={toolTips}
           bg='blue.900'

@@ -107,10 +107,9 @@ export default function HighScore(props) {
                       borderColor: 'yellow.400',
                     }}
                     onMouseOver={() => handleHover(letter)}
+                    onClick={() => handleClick(letter)}
                   >
-                    <Text fontSize='7xl' onClick={() => handleClick(letter)}>
-                      {letter}
-                    </Text>
+                    <Text fontSize='7xl'>{letter}</Text>
                   </Box>
                 ))}
                 <Box
