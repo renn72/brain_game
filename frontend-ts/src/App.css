@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+
+.App {
+  font-family: 'Righteous', cursive;
+  text-align: center;
+  background-color: #161430;
+  color: #fdff9b;
+  height: 100vh;
+}

@@ -1,12 +1,1 @@
-[
-  { "score": 86.7, "name": ".DT" },
-  { "score": 82.7, "name": "CRS" },
-  { "score": 80.1, "name": "KAS" },
-  { "score": 79, "name": ".DT" },
-  { "score": 78.2, "name": "GEW" },
-  { "score": 78, "name": ".DT" },
-  { "score": 75.2, "name": "CAM" },
-  { "score": 69.7, "name": "CRS" },
-  { "score": 42.1, "name": "TOM" },
-  { "score": 39.9, "name": "JAZ" }
-]
+[{"score":86.7,"name":".DT"},{"score":82.7,"name":"CRS"},{"score":80.1,"name":"KAS"},{"score":79,"name":".DT"},{"score":78.2,"name":"GEW"},{"score":78,"name":".DT"},{"score":75.2,"name":"CAM"},{"score":69.7,"name":"CRS"},{"score":42.1,"name":"TOM"},{"score":39.9,"name":"JAZ"},{"score":"66.9","name":"DAV"}]
